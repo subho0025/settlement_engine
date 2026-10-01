@@ -6,9 +6,9 @@ vector<Amount> net_balance(const Instance& inst){
 
     vector<Amount> balance(inst.n,0);
 
-    for(int i=0; i<(int)inst.obs.size(); i++){
-        balance[inst.obs[i].from]-= inst.obs[i].amt;
-        balance[inst.obs[i].to] += inst.obs[i].amt;
+    for(const Obligation& obs: inst.obs){
+        balance[obs.from]-= obs.amt;
+        balance[obs.to] += obs.amt;
     }
 
     return balance;

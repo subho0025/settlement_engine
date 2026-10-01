@@ -2,6 +2,9 @@
 
 using namespace std;
 
+static const Amount MAX_AMT = 1000000000000LL;
+static const Amount MAX_N_VAL = 100000;
+static const Amount MAX_M_VAL = 1000000;
 Instance read_instance(istream& s){
 
     Instance inst;
@@ -11,8 +14,8 @@ Instance read_instance(istream& s){
     if(!(s >> n)) throw runtime_error("missing or non-numeric n");
     if(!(s >> m)) throw runtime_error("missing or non-numeric m");
  
-    if(n < 1 || n > 1e5) throw runtime_error("n out of range [1, 100000]");
-    if(m < 0 || m > 1e6) throw runtime_error("m out of range [0, 1000000]");
+    if(n < 1 || n > MAX_N_VAL) throw runtime_error("n out of range [1, 100000]");
+    if(m < 0 || m > MAX_M_VAL) throw runtime_error("m out of range [0, 1000000]");
  
     inst.n = (int)n;
     inst.obs.resize((int)m);

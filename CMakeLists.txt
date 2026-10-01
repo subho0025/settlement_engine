@@ -12,6 +12,8 @@ endif()
 add_library(settle STATIC
   src/io.cpp
   src/net_balance.cpp
+  src/validator.cpp
+  src/generators.cpp
 )
 target_include_directories(settle PUBLIC includes)
 target_compile_options(settle PRIVATE -Wall -Wextra -Wshadow)
@@ -23,8 +25,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # --- tests -----------------------------------------------------------------
-# Add each new test executable to UNIT_TESTS (and an add_test line below it).
-set(UNIT_TESTS test_task1)
+set(UNIT_TESTS test_task1 test_task2 test_task3)
 
 set(CMAKE_CTEST_ARGUMENTS "--output-on-failure")
 enable_testing()
@@ -33,6 +34,20 @@ add_executable(test_task1 tests/unit/test_task1.cpp)
 target_link_libraries(test_task1 PRIVATE settle)
 target_compile_options(test_task1 PRIVATE -Wall -Wextra -Wshadow)
 add_test(NAME task1 COMMAND test_task1)
+
+add_executable(test_task2 tests/unit/test_task2.cpp)
+target_link_libraries(test_task2 PRIVATE settle)
+target_compile_options(test_task2 PRIVATE -Wall -Wextra -Wshadow)
+add_test(NAME task2 COMMAND test_task2)
+
+add_executable(test_task3 tests/unit/test_task3.cpp)
+target_link_libraries(test_task3 PRIVATE settle)
+target_compile_options(test_task3 PRIVATE -Wall -Wextra -Wshadow)
+add_test(NAME task3 COMMAND test_task3)
+
+add_executable(gen gen/gen_main.cpp)
+target_link_libraries(gen PRIVATE settle)
+target_compile_options(gen PRIVATE -Wall -Wextra -Wshadow)
 
 # --- make targets ------------------------------------------------------------
 #   make         build library + all tests (default target)

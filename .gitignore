@@ -20,7 +20,7 @@ install_manifest.txt
 *.exe
 *.out
 *.d
-test_task*
+/test_task*
 
 compile_commands.json
 .cache/
