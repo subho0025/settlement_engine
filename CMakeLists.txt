@@ -14,6 +14,8 @@ add_library(settle STATIC
   src/net_balance.cpp
   src/validator.cpp
   src/generators.cpp
+  src/naive.cpp
+  src/greedy.cpp
 )
 target_include_directories(settle PUBLIC includes)
 target_compile_options(settle PRIVATE -Wall -Wextra -Wshadow)
@@ -25,7 +27,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # --- tests -----------------------------------------------------------------
-set(UNIT_TESTS test_task1 test_task2 test_task3)
+set(UNIT_TESTS test_task1 test_task2 test_task3 test_task4)
 
 set(CMAKE_CTEST_ARGUMENTS "--output-on-failure")
 enable_testing()
@@ -44,6 +46,11 @@ add_executable(test_task3 tests/unit/test_task3.cpp)
 target_link_libraries(test_task3 PRIVATE settle)
 target_compile_options(test_task3 PRIVATE -Wall -Wextra -Wshadow)
 add_test(NAME task3 COMMAND test_task3)
+
+add_executable(test_task4 tests/unit/test_task4.cpp)
+target_link_libraries(test_task4 PRIVATE settle)
+target_compile_options(test_task4 PRIVATE -Wall -Wextra -Wshadow)
+add_test(NAME task4 COMMAND test_task4)
 
 add_executable(gen gen/gen_main.cpp)
 target_link_libraries(gen PRIVATE settle)
