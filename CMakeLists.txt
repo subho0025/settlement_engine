@@ -17,6 +17,8 @@ add_library(settle STATIC
   src/naive.cpp
   src/greedy.cpp
   src/subset_dp.cpp
+  src/group_plan.cpp
+  src/match.cpp
 )
 target_include_directories(settle PUBLIC includes)
 target_compile_options(settle PRIVATE -Wall -Wextra -Wshadow)
@@ -28,7 +30,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # --- tests -----------------------------------------------------------------
-set(UNIT_TESTS test_task1 test_task2 test_task3 test_task4 test_task5)
+set(UNIT_TESTS test_task1 test_task2 test_task3 test_task4 test_task5 test_task6)
 
 set(CMAKE_CTEST_ARGUMENTS "--output-on-failure")
 enable_testing()
@@ -62,6 +64,11 @@ target_link_libraries(test_task5 PRIVATE settle)
 target_include_directories(test_task5 PRIVATE tests/brute)
 target_compile_options(test_task5 PRIVATE -Wall -Wextra -Wshadow)
 add_test(NAME task5 COMMAND test_task5)
+
+add_executable(test_task6 tests/unit/test_task6.cpp)
+target_link_libraries(test_task6 PRIVATE settle)
+target_compile_options(test_task6 PRIVATE -Wall -Wextra -Wshadow)
+add_test(NAME task6 COMMAND test_task6)
 
 # --- make targets ------------------------------------------------------------
 #   make         build library + all tests (default target)
