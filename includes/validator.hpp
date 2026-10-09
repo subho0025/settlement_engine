@@ -13,3 +13,11 @@ struct ValidationResult {
 };
 
 ValidationResult validate_netting(const Instance&, const Plan&);
+
+struct GridlockCheck {
+    bool ok = false;
+    string error;
+    size_t settled_count = 0;
+    Amount settled_value = 0;
+};
+GridlockCheck validate_gridlock(const Instance&, const vector<int>& selected);
