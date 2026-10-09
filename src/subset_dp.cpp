@@ -27,7 +27,7 @@ vector<vector<int>> dp_max_groups(const vector<Amount>& b){
     vector<int> prev(max_mask+1, -1);
 
     for(uint32_t mask=1; mask<=max_mask; mask++){
-        int i = ffsl(mask)-1;
+        int i = __builtin_ctz(mask);
         uint32_t prev_mask = mask&(mask-1);
         subset_sum[mask] = subset_sum[prev_mask] + b[i];
 
