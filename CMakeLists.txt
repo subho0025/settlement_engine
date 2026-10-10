@@ -21,6 +21,7 @@ add_library(settle STATIC
   src/match.cpp
   src/mitm.cpp
   src/fifo_bypass.cpp
+  src/drop_violators.cpp
 )
 target_include_directories(settle PUBLIC includes)
 target_compile_options(settle PRIVATE -Wall -Wextra -Wshadow)
@@ -32,7 +33,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # --- tests -----------------------------------------------------------------
-set(UNIT_TESTS test_task1 test_task2 test_task3 test_task4 test_task5 test_task6 test_task7 test_task8)
+set(UNIT_TESTS test_task1 test_task2 test_task3 test_task4 test_task5 test_task6 test_task7 test_task8 test_task9)
 
 set(CMAKE_CTEST_ARGUMENTS "--output-on-failure")
 enable_testing()
@@ -82,6 +83,12 @@ target_link_libraries(test_task8 PRIVATE settle)
 target_include_directories(test_task8 PRIVATE tests/brute)
 target_compile_options(test_task8 PRIVATE -Wall -Wextra -Wshadow)
 add_test(NAME task8 COMMAND test_task8)
+
+add_executable(test_task9 tests/unit/test_task9.cpp)
+target_link_libraries(test_task9 PRIVATE settle)
+target_include_directories(test_task9 PRIVATE tests/brute)
+target_compile_options(test_task9 PRIVATE -Wall -Wextra -Wshadow)
+add_test(NAME task9 COMMAND test_task9)
 
 # --- make targets ------------------------------------------------------------
 #   make         build library + all tests (default target)
